@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px" >
+
+    <header class="py-5">
+        <h2 class="d-flex justify-content-center">회원 목록</h2>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary"
+                    th:onclick="|location.href='@{/basic/members/add}'|"
+                    type="button">회원 등록</button>
+        </div>
+    </header>
+
+    <main>
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th style="width: 50%">제목</th>
+                <th>이름</th>
+                <th class="d-flex justify-content-center">날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member:${members}">
+                <td><a  th:href="@{/basic/members/{memberId}(memberId=${member.id})}" th:text="${member.id}">회원id</a></td>
+                <td><a  th:href="@{|/basic/members/${member.id}|}"
+                        th:text="${member.caption}">제목</a></td>
+                <td th:text="${member.name}">이름</td>
+                <td th:text="${member.date}" class="d-flex justify-content-center">날짜</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+
+        </div>
+    </main>
+
+</div>
+
+
+</body>
+</html>

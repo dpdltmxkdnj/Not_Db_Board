@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <style>
+        .field-error{
+            color: red;
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="max-width: 560px">
+    <h2 class="d-flex justify-content-center py-5">
+        로그인
+    </h2>
+    <form th:action method="post" th:object="${loginMember}">
+        <div class="d-flex flex-column justify-content-center">
+            <label for="loginId">로그인 ID</label>
+            <input class="form-control" type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{loginId}">ID 오류</div>
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+            <label for="password">비밀번호</label>
+            <input class="form-control" type="password" id="password" th:field="*{password}" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{password}">비밀번호 오류</div>
+        </div>
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+               th:text="${err}">전체 오류 메시지</p>
+        </div>
+        <div class="d-flex justify-content-center py-5">
+            <button  class="btn btn-outline-danger btn-lg w-100 mx-3">로그인</button>
+            <button class="btn btn-outline-success btn-lg w-100 mx-3"
+                    th:onclick="|location.href='@{/}'|"
+                    type="button">취소</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
